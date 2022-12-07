@@ -9,10 +9,10 @@ def main():
     # Program parameters
     filename = sys.argv[1]
     divisor = bitarray(sys.argv[2])
-    crc_len = int(sys.argv[3])
-    burst_size = int(sys.argv[4])
-    seed = int(sys.argv[5])
-    iter_max = int(sys.argv[6])
+    crc_len = len(divisor)-1
+    burst_size = int(sys.argv[3])
+    seed = int(sys.argv[4])
+    iter_max = int(sys.argv[5])
     print(f"""filename:{filename}
 divisor:{divisor.to01()}
 Bits de paridad: {crc_len}
@@ -36,7 +36,7 @@ Iteraciones: {iter_max}""")
         rem = divisionMod2.mod2div(corrupted_msg, divisor)
         #print(rem.to01())
         # Determines whether rem equals zero or not
-        success = 1 if rem.to01()!= zero_rem.to01() else 0
+        success = 1 if rem.to01() != zero_rem.to01() else 0
         # Compute the number of times the CRC detects the error
         counter += success
         probabilidad.append(counter/(i+1))
