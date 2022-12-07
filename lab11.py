@@ -1,6 +1,4 @@
 from modulos import crc
-from modulos import divisionMod2
-from modulos import burst_error
 import sys
 import matplotlib.pyplot as plt
 from bitarray import bitarray
@@ -31,9 +29,9 @@ Iteraciones: {iter_max}""")
     probabilidad = []
     for i in range(0, iter_max):
         # Burst error generation
-        corrupted_msg = burst_error.burst_err(msg + crc_code, burst_size, seed + i)
+        corrupted_msg = crc.burst_err(msg + crc_code, burst_size, seed + i)
         # Computes remainder
-        rem = divisionMod2.mod2div(corrupted_msg, divisor)
+        rem = crc.mod2div(corrupted_msg, divisor)
         #print(rem.to01())
         # Determines whether rem equals zero or not
         success = 1 if rem.to01() != zero_rem.to01() else 0
